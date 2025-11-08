@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马冰武同志五年工作纪念</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #8c2e2e;
+            --secondary-color: #d4af37;
+            --bg-color: #f8f4ee;
+            --text-color: #333;
+            --card-bg: rgba(255, 255, 255, 0.85);
+        }
+        
+        body {
+            font-family: "SimSun", "STSong", serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--bg-color) 0%, #e8e0d5 100%);
+            overflow-x: auto;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+        
+        .container-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 20px;
+        }
+        
+        .horizontal-container {
+            display: flex;
+            width: max-content;
+            min-height: 90vh;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px 0;
+            scroll-padding: 0 50%;
+        }
+        
+        .year-panel, .intro-panel {
+            width: 85vw;
+            max-width: 1100px;
+            min-height: calc(90vh - 40px);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid #e0d6c8;
+            scroll-snap-align: center;
+            flex-shrink: 0;
+        }
+        
+        .year-panel::before, .intro-panel::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(140, 46, 46, 0.2);
+            pointer-events: none;
+            border-radius: 8px;
+        }
+        
+        .year-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .year-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+        }
+        
+        .year-title {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .year-subtitle {
+            font-size: 1.2rem;
+            color: #5a5a5a;
+            letter-spacing: 2px;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        .event-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .event-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        .event-date {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .event-date::before {
+            content: "•";
+            margin-right: 8px;
+            color: var(--secondary-color);
+        }
+        
+        .event-content {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+        
+        .event-photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .photo-thumb {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .photo-thumb:hover {
+            transform: scale(1.05);
+        }
+        
+        .important-node {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            position: relative;
+        }
+        
+        .important-node::after {
+            content: "重要节点";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary-color);
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        
+        .intro-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--primary-color));
+        }
+        
+        .intro-content {
+            max-width: 800px;
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #2c2c2c;
+        }
+        
+        .intro-content p {
+            margin-bottom: 20px;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .nav-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 800px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 3px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s;
+            border-radius: 3px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 4px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .photo-caption {
+            color: white;
+            margin-top: 15px;
+            text-align: center;
+            max-width: 80%;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: var(--secondary-color);
+        }
+        
+        .ink-splash {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            opacity: 0.03;
+            z-index: -1;
+        }
+        
+        .splash-1 {
+            top: 10%;
+            left: 5%;
+            background: radial-gradient(circle, #2c2c2c 0%, transparent 70%);
+        }
+        
+        .splash-2 {
+            bottom: 15%;
+            right: 8%;
+            background: radial-gradient(circle, #8c2e2e 0%, transparent 70%);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .year-panel, .intro-panel {
+                padding: 25px;
+                width: 90vw;
+            }
+            
+            .year-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .intro-content {
+                font-size: 1.1rem;
+            }
+            
+            .navigation {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 90%;
+            }
+        }
+        
+        /* 水墨画风格装饰元素 */
+        .brush-stroke {
+            position: fixed;
+            background: #2c2c2c;
+            opacity: 0.05;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .stroke-1 {
+            width: 300px;
+            height: 100px;
+            top: 15%;
+            right: 5%;
+            transform: rotate(15deg);
+        }
+        
+        .stroke-2 {
+            width: 200px;
+            height: 150px;
+            bottom: 10%;
+            left: 3%;
+            transform: rotate(-10deg);
+        }
+        
+        /* 添加伪元素确保第一个和最后一个面板能居中 */
+        .horizontal-container::before,
+        .horizontal-container::after {
+            content: '';
+            display: block;
+            width: calc(50vw - 42.5vw);
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="brush-stroke stroke-1"></div>
+    <div class="brush-stroke stroke-2"></div>
+    
+    <div class="ink-splash splash-1"></div>
+    <div class="ink-splash splash-2"></div>
+    
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <div class="container-wrapper">
+        <div class="horizontal-container" id="horizontalContainer">
+            <!-- 前言部分 -->
+            <section class="intro-panel">
+                <h2 class="section-title">前言</h2>
+                <div class="intro-content">
+                    <p>五年时光，一晃而过</p>
+                    <p>都融进了徽州的日升月落里。</p>
+                    <p>那踏遍江淮的调研脚步，</p>
+                    <p>是对这片土地的真心。</p>
+                    <p>签下的每份协议，</p>
+                    <p>听过的机组轰鸣，</p>
+                    <p>是对奋斗的诠释。</p>
+                    <p>党课上的箴言，如灯。</p>
+                    <p>项目里的攻坚，似火。</p>
+                    <p>……</p>
+                    <p>而今，新征程将启。</p>
+                    <p>万般不舍，凝成一句珍重的祝愿。</p>
+                    <p>这五载华章，</p>
+                    <p>已是我们心底，最温暖的力量。</p>
+                </div>
+            </section>
+            
+            <!-- 2021年 -->
+            <section class="year-panel">
+                <div class="year-header">
+                    <h2 class="year-title">2021</h2>
+                    <div class="year-subtitle">开局之年 · 绿色转型新跨越</div>
+                </div>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-date">1月28-29日</div>
+                        <div class="event-content">华能安徽分公司三届一次职工代表大会暨2021年工作会议、党的建设工作会议在合肥召开。</div>
+                        <div class="event-photos">
+                            <img src="img/20210129三届一次职代会1.jpg" alt="工作会议照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">2月1日</div>
+                        <div class="event-content">巢湖电厂调研，并主持召开了巢湖电厂中层干部以上人员座谈会。</div>
+                        <div class="event-photos">
+                            <img src="img/20210202154412952.jpg" alt="巢湖电厂调研照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card important-node">
+                        <div class="event-date">3月12日</div>
+                        <div class="event-content">华能安徽分公司与全椒县人民政府签约光伏发电项目投资开发协议书。该项目是分公司有史以来单个规模最大的新能源项目。</div>
+                    </div>
+                    
+                    <div class="event-card important-node">
+                        <div class="event-date">3月29日</div>
+                        <div class="event-content">会见亳州市政府副市长、党组成员郑超一行，双方就继续扩大华能蒙城县风电基地加强能源领域战略合作开展深入交流。</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2022年 -->
+            <section class="year-panel">
+                <div class="year-header">
+                    <h2 class="year-title">2022</h2>
+                    <div class="year-subtitle">稳步推进 · 能源保供显担当</div>
+                </div>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-date">1月21日</div>
+                        <div class="event-content">正值2022年新春佳节来临之际，走访慰问困难员工、老党员，并送上慰问金以及新春祝福。</div>
+                        <div class="event-photos">
+                            <img src="img/20210202民主生活会（2020年度）.jpg" alt="慰问员工照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">1月26日</div>
+                        <div class="event-content">安徽省委常委、常务副省长刘惠到华能安徽分公司督导调研安全生产和能源保供工作。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2022.2" alt="督导调研照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">3月2日</div>
+                        <div class="event-content">会见安徽省皖森林业投资股份有限公司董事长杨国荣一行。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2022.3" alt="会见照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">4月27日</div>
+                        <div class="event-content">蒙城县"十四五"时期新能源高质量发展云对接会议分别在蒙城、合肥、北京、株洲等四地召开。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2022.4" alt="云对接会议照片" class="photo-thumb">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2023年 -->
+            <section class="year-panel">
+                <div class="year-header">
+                    <h2 class="year-title">2023</h2>
+                    <div class="year-subtitle">高质量发展 · 主题教育显成效</div>
+                </div>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-date">1月3日</div>
+                        <div class="event-content">省能源局副局长迎风度冬保供调研。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2023.1" alt="调研照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">2月14日</div>
+                        <div class="event-content">前往巢湖电厂宣讲党的二十大精神并督导2022年度电厂领导班子民主生活会。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2023.2" alt="宣讲照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card important-node">
+                        <div class="event-date">3月12-14日</div>
+                        <div class="event-content">安徽分公司新能源发电量首次实现新能源日发电量连续超千万千瓦时。</div>
+                    </div>
+                    
+                    <div class="event-card important-node">
+                        <div class="event-date">4月21日</div>
+                        <div class="event-content">能销公司华能能阳25万千瓦户用分布式屋顶光伏发电项目实现全容量并网，较原计划工期提前了70天。</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2024年 -->
+            <section class="year-panel">
+                <div class="year-header">
+                    <h2 class="year-title">2024</h2>
+                    <div class="year-subtitle">党建引领 · 创新突破谱新篇</div>
+                </div>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-date">1月5日</div>
+                        <div class="event-content">蒙城风光储一体化项目配套引进的产业项目——蒙城新能源装备制造产业园项目开工仪式在蒙城县乐土镇举行。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2024.1" alt="开工仪式照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">1月10日</div>
+                        <div class="event-content">马冰武到巢湖电厂慰问困难职工。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2024.2" alt="慰问职工照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">1月11日</div>
+                        <div class="event-content">干部宣布大会、含马书记。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2024.3" alt="干部宣布大会照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">1月28日</div>
+                        <div class="event-content">分公司新办公房启用。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2024.4" alt="新办公房启用照片" class="photo-thumb">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2025年 -->
+            <section class="year-panel">
+                <div class="year-header">
+                    <h2 class="year-title">2025</h2>
+                    <div class="year-subtitle">继往开来 · 砥砺奋进新征程</div>
+                </div>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-date">1月14日</div>
+                        <div class="event-content">"砥砺奋进凯歌行 登高攀新再出发"华能安徽分公司2025年职工汇报演出在巢湖举行。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2025.1" alt="汇报演出照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">1月15日</div>
+                        <div class="event-content">安徽分公司在巢湖召开党的建设工作会议，总结2024年党的建设工作，部署2025年党建重点任务。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2025.2" alt="党建工作会议照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">1月15日</div>
+                        <div class="event-content">华能安徽分公司三届七次职工代表大会暨2025年工作会议在巢湖召开。</div>
+                        <div class="event-photos">
+                            <img src="https://via.placeholder.com/80x60/8c2e2e/ffffff?text=2025.3" alt="工作会议照片" class="photo-thumb">
+                        </div>
+                    </div>
+                    
+                    <div class="event-card important-node">
+                        <div class="event-date">2月7日</div>
+                        <div class="event-content">安徽分公司新能源板块发电量首次突破2000万千瓦时大关。</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 后记部分 -->
+            <section class="intro-panel">
+                <h2 class="section-title">后记</h2>
+                <div class="intro-content">
+                    <p>五年光阴，</p>
+                    <p>就像一本翻不够的书，</p>
+                    <p>每一页，</p>
+                    <p>都写满了实打实的故事。</p>
+                    <p>这所有光芒的片段，</p>
+                    <p>如今都成为我们怀中，</p>
+                    <p>最珍贵的行囊。</p>
+                    <p>这本薄薄的纪念册，</p>
+                    <p>载不动全部敬意，</p>
+                    <p>只愿它化作一缕清风，</p>
+                    <p>伴您启程，前程皆锦。</p>
+                    <p>往后岁岁年年，</p>
+                    <p>皆安康、皆顺遂！</p>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn">上一页</button>
+        <button class="nav-btn" id="nextBtn">下一页</button>
+        <button class="nav-btn" id="firstBtn">前言</button>
+        <button class="nav-btn" id="lastBtn">后记</button>
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="photo-caption" id="modalCaption"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('horizontalContainer');
+            const panels = document.querySelectorAll('.year-panel, .intro-panel');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const firstBtn = document.getElementById('firstBtn');
+            const lastBtn = document.getElementById('lastBtn');
+            const progressFill = document.getElementById('progressFill');
+            
+            let currentIndex = 0;
+            const totalPanels = panels.length;
+            
+            // 更新导航状态和进度条
+            function updateNavigation() {
+                // 更新进度条
+                const progress = (currentIndex / (totalPanels - 1)) * 100;
+                progressFill.style.width = `${progress}%`;
+                
+                // 更新按钮状态
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === totalPanels - 1;
+            }
+            
+            // 滚动到指定面板
+            function scrollToPanel(index) {
+                if (index < 0 || index >= totalPanels) return;
+                
+                currentIndex = index;
+                const panel = panels[index];
+                
+                // 使用scrollIntoView方法替代scrollTo
+                panel.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+                
+                updateNavigation();
+            }
+            
+            // 导航按钮事件
+            prevBtn.addEventListener('click', () => {
+                scrollToPanel(currentIndex - 1);
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                scrollToPanel(currentIndex + 1);
+            });
+            
+            firstBtn.addEventListener('click', () => {
+                scrollToPanel(0);
+            });
+            
+            lastBtn.addEventListener('click', () => {
+                scrollToPanel(totalPanels - 1);
+            });
+            
+            // 键盘导航
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    scrollToPanel(currentIndex - 1);
+                } else if (e.key === 'ArrowRight') {
+                    scrollToPanel(currentIndex + 1);
+                }
+            });
+            
+            // 修复图片点击事件语法问题
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeBtn = document.getElementById('closeModal');
+            
+            // 修复语法错误：使用正确的forEach方法
+            document.querySelectorAll('.photo-thumb').forEach(function(thumb) {
+                thumb.addEventListener('click', function() {
+                    modal.style.display = 'flex';
+                    modalImg.src = this.src;
+                    modalCaption.textContent = this.alt;
+                });
+            });
+            
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // 初始化导航状态
+            updateNavigation();
+            
+            // 添加水墨画风格的随机墨点
+            addInkDots();
+            
+            // 初始滚动到第一个面板，确保居中显示
+            setTimeout(() => {
+                scrollToPanel(0);
+            }, 100);
+        });
+        
+        function addInkDots() {
+            const container = document.querySelector('.horizontal-container');
+            const dotCount = 20;
+            
+            for (let i = 0; i < dotCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'ink-dot';
+                
+                const size = Math.random() * 10 + 5;
+                const opacity = Math.random() * 0.1 + 0.02;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                dot.style.cssText = `
+                    position: fixed;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background-color: #2c2c2c;
+                    border-radius: 50%;
+                    opacity: ${opacity};
+                    left: ${left}%;
+                    top: ${top}%;
+                    z-index: -1;
+                `;
+                
+                document.body.appendChild(dot);
+            }
+        }
+    </script>
+</body>
+</html>
